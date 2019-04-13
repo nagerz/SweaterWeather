@@ -2,14 +2,10 @@ require 'rails_helper'
 
 describe 'As any kind of user' do
   describe 'when I visit the home page' do
-    it 'I see a title and a locaiton search bar' do
-	    visit '/'
-
-      expect(current_path).to be(root_path)
+    it 'I see a title and a location search bar' do
+	    visit root_path
 
       expect(page).to have_content("Sweater Weather?")
-
-      expect(page).to have_content("Search Location (City, State):")
 
       expect(page).to have_button('Check weather')
 
@@ -17,11 +13,11 @@ describe 'As any kind of user' do
 
       expect(page).to_not have_content("Details")
 
-      expect(current_path).to be(root_path)
+      expect(current_path).to be(expected)
 
-      expect(page).to have_content("Please enter a search location")
+      expect(page).to have_button('Check weather')
 
-      fill_in 'Location', with: 'Denver, CO'
+      fill_in :location, with: 'Denver, CO'
 
       click_on 'Check weather'
 

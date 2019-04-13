@@ -1,1 +1,12 @@
 <h1>Sweater Weather?</h1>
+
+<div class="search-bar bar">
+  <div class=" search-field col md-col-3">
+    <%= form_tag(root_path, method: :post, id: "search-form") do %>
+      <%= label_tag "" %>
+      <%= text_field_tag :location, params[:location], placeholder: "Search Location (City, State):" %>
+
+      <%= submit_tag "Check weather"  %>
+    <% end %>
+  </div>
+</div>
