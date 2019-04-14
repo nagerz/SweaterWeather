@@ -13,7 +13,9 @@ class Api::V1::ForecastController < ApplicationController
       city.state = geo_state
     end
 
-    forecast = DarkskyService.new.get_forecast(search_city)
+    forecast = Forecast.new(DarkskyService.new.get_forecast(search_city))
+
+    binding.pry
 
     render json: ForecastSerializer.new(forecast)
   end
