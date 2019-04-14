@@ -1,22 +1,24 @@
 class CitiesController < ApplicationController
   def show
+    if params[:location] && params[:location] != ""
+      render locals: {
+        facade: ForecastFacade.new(params[:location]).forecast
+      }
+    else
+      render locals: {
+        facade: nil
+      }
+    end
   end
 
   def create
     if params[:location] == ""
       flash[:alert] = 'Please enter a search location'
-      render :show
-    else
-      search_location = params[:location]
-      parse_search(search_location)
+      redirect_to root_path
 
-      @city = find_or_create_by(latitude: location.lat, longitude: location.long)
+    else
+      redirect_to root_path(location: params[:location])
     end
   end
 
-  private
-
-  def geocode_search(serch_location)
-    
-  end
 end

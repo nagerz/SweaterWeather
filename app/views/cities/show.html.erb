@@ -10,3 +10,25 @@
     <% end %>
   </div>
 </div>
+
+<% if !facade.nil? %>
+  <section class="weather-window">
+    <section class="search-currently">
+      <ul>
+        <li><%= facade.currently[:current_icon] %></li>
+        <li><%= facade.currently[:current_summary] %></li>
+        <li><%= facade.currently[:current_temp] %></li>
+        <li>High: <%= facade.currently[:day_0_high] %></li>
+        <li>Low: <%= facade.currently[:day_0_low] %></li>
+        <li><%= facade.city %>, <%= facade.state %></li>
+        <li><%= facade.time %></li>
+      </ul>
+    </section>
+
+    <section class="search-details">
+      <h5>Details</h5>
+    </section>
+    <section class="search-forecast">
+    </section>
+  </section>
+<% end %>

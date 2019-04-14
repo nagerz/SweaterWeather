@@ -20,7 +20,7 @@ describe 'As any kind of user' do
 
       click_on 'Check weather'
 
-      expect(current_path).to be(root_path)
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_content('Denver, CO')
       expect(page).to have_content('High:')

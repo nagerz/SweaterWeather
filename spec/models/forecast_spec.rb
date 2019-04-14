@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Forecast do
   it 'has attributes' do
+    city = City.create(city: 'Denver', state: 'CO', lat: 39.7392358, long: -104.990251)
     forecast_data = JSON.parse(File.read('./spec/fixtures/forecast_model_data.rb'), symbolize_names: true)
 
-    forecast = Forecast.new(forecast_data)
+    forecast = Forecast.new(forecast_data, city)
 
     expect(forecast.latitude).to eq(37.8267)
     expect(forecast.longitude).to eq(-122.4233)
