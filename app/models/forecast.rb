@@ -1,11 +1,24 @@
 class Forecast
-  attr_reader :currently, :details, :forecast
+  attr_reader :latitude,
+              :longitude,
+              :time,
+              :currently,
+              :details,
+              :forecast,
+              :id,
+              :city,
+              :state
 
-  def initialize(forecast_data)
+  def initialize(forecast_data, city)
+    @id = "#{city.city}#{city.state}_#{forecast_data[:currently][:time]}"
+    @city = city.city
+    @state = city.state
+    @latitude = forecast_data[:latitude]
+    @longitude = forecast_data[:longitude]
+    @time = forecast_data[:currently][:time]
+
     @currently = {}
-    @currently[:latitude] = forecast_data[:latitude]
-    @currently[:longitude] = forecast_data[:longitude]
-    @currently[:time] = forecast_data[:currently][:time]
+
     @currently[:current_temp] = forecast_data[:currently][:temperature]
     @currently[:current_summary] = forecast_data[:currently][:summary]
     @currently[:current_icon] = forecast_data[:currently][:icon]

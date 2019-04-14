@@ -6,9 +6,10 @@ RSpec.describe Forecast do
 
     forecast = Forecast.new(forecast_data)
 
-    expect(forecast.currently[:latitude]).to eq(37.8267)
-    expect(forecast.currently[:longitude]).to eq(-122.4233)
-    expect(forecast.currently[:time]).to eq(1555201964)
+    expect(forecast.latitude).to eq(37.8267)
+    expect(forecast.longitude).to eq(-122.4233)
+    expect(forecast.time).to eq(1555201964)
+
     expect(forecast.currently[:current_summary]).to eq('Mostly Cloudy')
     expect(forecast.currently[:current_icon]).to eq('partly-cloudy-day')
     expect(forecast.currently[:current_temp]).to eq(62.73)
