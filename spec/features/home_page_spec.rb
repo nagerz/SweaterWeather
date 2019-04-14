@@ -5,15 +5,14 @@ describe 'As any kind of user' do
     it 'I see a title and a location search bar' do
 	    visit root_path
 
-      expect(page).to have_content("Sweater Weather?")
+      expect(page).to have_content('Sweater Weather?')
 
       expect(page).to have_button('Check weather')
 
       click_on 'Check weather'
 
-      expect(page).to_not have_content("Details")
-
-      expect(current_path).to be(expected)
+      expect(page).to have_content('Please enter a search location')
+      expect(page).to_not have_content('Details')
 
       expect(page).to have_button('Check weather')
 
@@ -23,10 +22,10 @@ describe 'As any kind of user' do
 
       expect(current_path).to be(root_path)
 
-      expect(page).to have_content("Denver, CO")
-      expect(page).to have_content("High:")
-      expect(page).to have_content("Low:")
-      expect(page).to have_content("Details")
+      expect(page).to have_content('Denver, CO')
+      expect(page).to have_content('High:')
+      expect(page).to have_content('Low:')
+      expect(page).to have_content('Details')
     end
   end
 end
