@@ -1,27 +1,45 @@
 class Api::V1::ForecastController < ApplicationController
 
   def show
-    search_location = params[:location]
-    geolocation = GoogleMapsService.new.geocode(search_location)
-    geo_lat = geolocation[:results][0][:geometry][:location][:lat]
-    geo_long = geolocation[:results][0][:geometry][:location][:lng]
-    geo_city = geolocation[:results][0][:address_components][0][:long_name]
-    geo_state = geolocation[:results][0][:address_components][2][:short_name]
-
-    search_city = City.find_or_create_by(lat: geo_lat, long: geo_long) do |city|
-      city.city = geo_city
-      city.state = geo_state
-    end
-
-    forecast = Forecast.new(DarkskyService.new.get_forecast(search_city), search_city)
-    
-    render json: ForecastSerializer.new(forecast)
+    render json: ForecastSerializer.new(forecast(search_city(geodata)))
   end
 
   private
 
   def search_params
-    params.permit(:id, :merchant_id, :customer_id, :status, :created_at, :updated_at)
+    params.permit(:location)
+  end
+
+  def geolocation
+    geocode_service.geocode(search_params[:location])
+  end
+
+  def geodata
+    data = {}
+    data[:geo_lat] = geolocation[:results][0][:geometry][:location][:lat]
+    data[:geo_long] = geolocation[:results][0][:geometry][:location][:lng]
+    data[:geo_city] = geolocation[:results][0][:address_components][0][:long_name]
+    data[:geo_state] = geolocation[:results][0][:address_components][2][:short_name]
+    data
+  end
+
+  def search_city(data)
+    City.find_or_create_by(lat: data[:geo_lat], long: data[:geo_long]) do |city|
+      city.city = data[:geo_city]
+      city.state = data[:geo_state]
+    end
+  end
+
+  def forecast(city)
+    Forecast.new(weather_service.get_forecast(city), city)
+  end
+
+  def weather_service
+    DarkskyService.new
+  end
+
+  def geocode_service
+    GoogleMapsService.new
   end
 
 end
