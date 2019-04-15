@@ -15,6 +15,10 @@ class Antipode
   end
 
   def forecast
+    data = {}
+    data[:summary] = forecast_data[:currently][:summary]
+    data[:current_temperature] = forecast_data[:currently][:temperature]
+    data
   end
 
   def antipode_coordinates
@@ -22,13 +26,6 @@ class Antipode
   end
 
   private
-
-  def reverse_geodata
-    data = {}
-    data[:geo_city] = reverse_geolocation[:results][0][:address_components][1][:long_name]
-    data[:geo_country] = reverse_geolocation[:results][0][:address_components][2][:long_name]
-    data
-  end
 
   def geodata
     data = {}
@@ -38,12 +35,23 @@ class Antipode
     data
   end
 
-  def reverse_geolocation
-    geocode_service.reverse_geocode(antipode_coordinates)
+  def reverse_geodata
+    data = {}
+    data[:geo_city] = reverse_geolocation[:results][0][:address_components][1][:long_name]
+    data[:geo_country] = reverse_geolocation[:results][0][:address_components][2][:long_name]
+    data
   end
 
   def geolocation
     geocode_service.geocode(@location)
+  end
+
+  def reverse_geolocation
+    geocode_service.reverse_geocode(antipode_coordinates)
+  end
+
+  def forecast_data
+    weather_service.get_forecast(city)
   end
 
   def geocode_service
@@ -54,6 +62,12 @@ class Antipode
     AntipodeService.new
   end
 
+  def weather_service
+    DarkskyService.new
+  end
 
+  def city
+    City.find_or_create_by(lat: antipode_coordinates[:lat], long: antipode_coordinates[:long])
+  end
 
 end

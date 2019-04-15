@@ -36,7 +36,7 @@ RSpec.describe Antipode do
   it 'can find forecast for given antipode city' do
     antipode = Antipode.new('hongkong')
 
-    expect(antipode.forecast).to have_key("summary")
-    expect(antipode.forecast).to have_key("current_temperature")
+    expect(antipode.forecast).to have_key(:summary)
+    expect(antipode.forecast).to have_key(:current_temperature)
   end
 end
