@@ -12,4 +12,15 @@ RSpec.describe Antipode do
 
     expect(antipode.search_location).to eq("Hong Kong")
   end
+
+  it 'can find antipode city' do
+    expected = {
+            "lat": -27,
+            "long": 98
+        }
+
+    antipode = Antipode.new('hongkong')
+
+    expect(antipode.antipode_coordinates).to eq(expected)
+  end
 end

@@ -9,6 +9,10 @@ class Antipode
     geodata[:geo_city]
   end
 
+  def antipode_coordinates
+    antipode_service.antipode(@location)[:data][:attributes]
+  end
+
   private
 
   def geodata
@@ -25,6 +29,10 @@ class Antipode
 
   def geocode_service
     GoogleMapsService.new
+  end
+
+  def antipode_service
+    AntipodeService.new
   end
 
 
