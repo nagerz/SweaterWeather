@@ -10,7 +10,7 @@ class Antipode
   end
 
   def antipode_coordinates
-    antipode_service.antipode(@location)[:data][:attributes]
+    antipode_service.antipode(geodata)[:data][:attributes]
   end
 
   private
