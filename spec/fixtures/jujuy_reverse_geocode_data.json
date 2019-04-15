@@ -1,0 +1,168 @@
+{
+    "plus_code": {
+        "compound_code": "M5J9+7P Cerrillos, Jujuy, Argentina",
+        "global_code": "579PM5J9+7P"
+    },
+    "results": [
+        {
+            "address_components": [
+                {
+                    "long_name": "Yavi Department",
+                    "short_name": "Yavi Department",
+                    "types": [
+                        "administrative_area_level_2",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Jujuy",
+                    "short_name": "Jujuy",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Argentina",
+                    "short_name": "AR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "Yavi Department, Jujuy, Argentina",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": -22.0723387,
+                        "lng": -65.1887933
+                    },
+                    "southwest": {
+                        "lat": -22.5793363,
+                        "lng": -65.96537339999999
+                    }
+                },
+                "location": {
+                    "lat": -22.2901385,
+                    "lng": -65.5707852
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": -22.0723387,
+                        "lng": -65.1887933
+                    },
+                    "southwest": {
+                        "lat": -22.5793363,
+                        "lng": -65.96537339999999
+                    }
+                }
+            },
+            "place_id": "ChIJS9TWYdcbBJQRGjm53-E3-Gg",
+            "types": [
+                "administrative_area_level_2",
+                "political"
+            ]
+        },
+        {
+            "address_components": [
+                {
+                    "long_name": "Jujuy",
+                    "short_name": "Jujuy",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Argentina",
+                    "short_name": "AR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "Jujuy, Argentina",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": -21.7794585,
+                        "lng": -64.1549213
+                    },
+                    "southwest": {
+                        "lat": -24.6074314,
+                        "lng": -67.23742059999999
+                    }
+                },
+                "location": {
+                    "lat": -24.1843397,
+                    "lng": -65.302177
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": -21.7794585,
+                        "lng": -64.1549213
+                    },
+                    "southwest": {
+                        "lat": -24.6074314,
+                        "lng": -67.23742059999999
+                    }
+                }
+            },
+            "place_id": "ChIJhwBc5_ahBJQReU7OMLKRXoE",
+            "types": [
+                "administrative_area_level_1",
+                "political"
+            ]
+        },
+        {
+            "address_components": [
+                {
+                    "long_name": "Argentina",
+                    "short_name": "AR",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "Argentina",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": -21.7810459,
+                        "lng": -53.637481
+                    },
+                    "southwest": {
+                        "lat": -55.1250224,
+                        "lng": -73.5603601
+                    }
+                },
+                "location": {
+                    "lat": -38.416097,
+                    "lng": -63.61667199999999
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": -21.7810459,
+                        "lng": -53.637481
+                    },
+                    "southwest": {
+                        "lat": -55.1250224,
+                        "lng": -73.5603601
+                    }
+                }
+            },
+            "place_id": "ChIJZ8b99fXKvJURqA_wKpl3Lz0",
+            "types": [
+                "country",
+                "political"
+            ]
+        }
+    ],
+    "status": "OK"
+}

@@ -5,6 +5,7 @@ RSpec.describe City, type: :model do
     it { should validate_presence_of(:city) }
     it { should validate_presence_of(:lat) }
     it { should validate_presence_of(:long) }
+    it { should validate_presence_of(:query) }
   end
 
   describe 'relationships' do

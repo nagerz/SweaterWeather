@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AntipodeService do
+describe AntipodeService, :vcr do
   it 'exists' do
     service = AntipodeService.new
 

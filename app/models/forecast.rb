@@ -9,10 +9,11 @@ class Forecast
               :city,
               :state
 
-  def initialize(forecast_data, city)
-    @id = "#{city.city}#{city.state}_#{forecast_data[:currently][:time]}"
-    @city = city.city
-    @state = city.state
+  def initialize(search_location)
+    @search_location = search_location
+    @id = "#{search_city.city}#{search_city.state}_#{forecast_data[:currently][:time]}"
+    @city = search_city.city
+    @state = search_city.state
     @latitude = forecast_data[:latitude]
     @longitude = forecast_data[:longitude]
     @time = forecast_data[:currently][:time]
@@ -58,4 +59,42 @@ class Forecast
     @forecast[:hourly] = hourly
     @forecast[:daily] = daily
   end
+
+  private
+
+  def search_city
+    City.find_or_create_by(query: @search_location) do |city|
+      city.lat = geodata[:geo_lat]
+      city.long = geodata[:geo_long]
+      city.city = geodata[:geo_city]
+      city.state = geodata[:geo_state]
+    end
+  end
+
+  def geodata
+    data = {}
+    data[:geo_lat] = geolocation[:results][0][:geometry][:location][:lat]
+    data[:geo_long] = geolocation[:results][0][:geometry][:location][:lng]
+    data[:geo_city] = geolocation[:results][0][:address_components][0][:long_name]
+    data[:geo_state] = geolocation[:results][0][:address_components][2][:short_name]
+    data
+  end
+
+  def geolocation
+    geocode_service.geocode(@search_location)
+  end
+
+  def geocode_service
+    GoogleMapsService.new
+  end
+
+  def forecast_data
+    weather_service.get_forecast(search_city)
+  end
+
+  def weather_service
+    DarkskyService.new
+  end
+
+
 end

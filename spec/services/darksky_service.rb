@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe DarkskyService do
+describe DarkskyService, :vcr do
   it 'exists' do
     service = DarkskyService.new
 

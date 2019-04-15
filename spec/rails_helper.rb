@@ -5,6 +5,20 @@ require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require 'vcr'
+require 'webmock/rspec'
+
+VCR.configure do |config|
+  config.ignore_localhost = true
+  config.cassette_library_dir = 'spec/cassettes'
+  config.hook_into :webmock
+  config.configure_rspec_metadata!
+  config.filter_sensitive_data('<GOOGLE_PLACES_API_KEY>') { ENV['GOOGLE_PLACES_API_KEY'] }
+  config.filter_sensitive_data('<DARKSKY_SECRET_KEY>') { ENV['DARKSKY_SECRET_KEY'] }
+  config.filter_sensitive_data('<UNSPLASH_ACCESS_KEY>') { ENV['UNSPLASH_ACCESS_KEY'] }
+  config.filter_sensitive_data('<UNSPLASH_SECRET_KEY>') { ENV['UNSPLASH_SECRET_KEY'] }
+  config.filter_sensitive_data('<ANTIPODE_API_KEY>') { ENV['ANTIPODE_API_KEY'] }
+end
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -32,12 +46,12 @@ def stub_get_json(url, filename)
     .to_return(status: 200, body: json_response)
 end
 
-def stub_post_json(url, filename)
-  json_response = File.open("./spec/fixtures/#{filename}")
-
-  stub_request(:post, url)
-    .to_return(status: 200, body: json_response)
-end
+# def stub_post_json(url, filename)
+#   json_response = File.open("./spec/fixtures/#{filename}")
+#
+#   stub_request(:post, url)
+#     .to_return(status: 200, body: json_response)
+# end
 
 begin
   ActiveRecord::Migration.maintain_test_schema!

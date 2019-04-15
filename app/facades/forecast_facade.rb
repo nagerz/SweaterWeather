@@ -29,7 +29,7 @@ class ForecastFacade
   end
 
   def make_forecast(city)
-    Forecast.new(weather_service.get_forecast(city), city)
+    Forecast.new(@location)
   end
 
   def weather_service

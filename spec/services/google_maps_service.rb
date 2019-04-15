@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe GoogleMapsService do
+describe GoogleMapsService, :vcr do
   it 'exists' do
     service = GoogleMapsService.new
 
