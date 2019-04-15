@@ -1,5 +1,5 @@
 class Antipode
-  attr_reader :location, :search_location, :location_name
+  attr_reader :location, :search_location, :location_name, :forecast
 
   def initialize(location)
     @location = location
@@ -10,7 +10,11 @@ class Antipode
   end
 
   def location_name
-    "#{reverse_geodata[:geo_city]}, #{reverse_geodata[:geo_country]}"
+    #"#{reverse_geodata[:geo_city]}, #{reverse_geodata[:geo_country]}"
+    reverse_geodata[:geo_city]
+  end
+
+  def forecast
   end
 
   def antipode_coordinates
