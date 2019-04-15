@@ -1,0 +1,34 @@
+<h1>Sweater Weather?</h1>
+
+<div class="search-bar bar">
+  <div class=" search-field col md-col-3">
+    <%= form_tag(root_path, method: :post, id: "search-form") do %>
+      <%= label_tag "" %>
+      <%= text_field_tag :location, params[:location], placeholder: "Search Location (City, State):" %>
+
+      <%= submit_tag "Check weather"  %>
+    <% end %>
+  </div>
+</div>
+
+<% if !facade.nil? %>
+  <section class="weather-window">
+    <section class="search-currently">
+      <ul>
+        <li><%= facade.currently[:current_icon] %></li>
+        <li><%= facade.currently[:current_summary] %></li>
+        <li><%= facade.currently[:current_temp] %></li>
+        <li>High: <%= facade.currently[:day_0_high] %></li>
+        <li>Low: <%= facade.currently[:day_0_low] %></li>
+        <li><%= facade.city %>, <%= facade.state %></li>
+        <li><%= facade.time %></li>
+      </ul>
+    </section>
+
+    <section class="search-details">
+      <h5>Details</h5>
+    </section>
+    <section class="search-forecast">
+    </section>
+  </section>
+<% end %>
