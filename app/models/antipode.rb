@@ -1,5 +1,5 @@
 class Antipode
-  attr_reader :location, :search_location
+  attr_reader :location, :search_location, :location_name
 
   def initialize(location)
     @location = location
@@ -11,6 +11,9 @@ class Antipode
 
   def antipode_coordinates
     antipode_service.antipode(geodata)[:data][:attributes]
+  end
+
+  def location_name
   end
 
   private
