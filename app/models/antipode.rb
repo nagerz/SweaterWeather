@@ -10,7 +10,7 @@ class Antipode
   end
 
   def location_name
-    reverse_geodata
+    "#{reverse_geodata[:geo_city]}, #{reverse_geodata[:geo_country]}"
   end
 
   def antipode_coordinates
@@ -21,7 +21,8 @@ class Antipode
 
   def reverse_geodata
     data = {}
-    data[:geo_city] = reverse_geolocation[:results][0][:address_components][0][:long_name]
+    data[:geo_city] = reverse_geolocation[:results][0][:address_components][1][:long_name]
+    data[:geo_country] = reverse_geolocation[:results][0][:address_components][2][:long_name]
     data
   end
 

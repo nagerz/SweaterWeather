@@ -25,7 +25,8 @@ RSpec.describe Antipode do
   end
 
   it 'can find antipode city location' do
-    expected = 'La Quiaca'
+    #expected = 'La Quiaca'
+    expected = 'Jujuy, Argentina'
 
     antipode = Antipode.new('hongkong')
 
