@@ -68,7 +68,11 @@ class Antipode
   end
 
   def city
-    City.find_or_create_by(lat: antipode_coordinates[:lat], long: antipode_coordinates[:long])
+    City.find_or_create_by(lat: antipode_coordinates[:lat],
+                          long: antipode_coordinates[:long]) do |city|
+                            city.city = location_name
+                          end
+
   end
 
 end
