@@ -20,5 +20,17 @@ describe GoogleMapsService do
         expect(response[:results][0][:address_components][2][:short_name]).to eq("CO")
       end
     end
+
+    describe '#reverse_geocode' do
+      it 'returns json with city information about given coordinates' do
+        coordinates = {:lat=>-22.3193039, :long=>-65.8306389}
+
+        service = GoogleMapsService.new
+
+        response = service.reverse_geocode(coordinates)
+
+        expect(response[:results][1][:formatted_address]).to eq("Jujuy, Argentina")
+      end
+    end
   end
 end

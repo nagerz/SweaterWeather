@@ -9,14 +9,21 @@ class Antipode
     geodata[:geo_city]
   end
 
+  def location_name
+    reverse_geodata
+  end
+
   def antipode_coordinates
     antipode_service.antipode(geodata)[:data][:attributes]
   end
 
-  def location_name
-  end
-
   private
+
+  def reverse_geodata
+    data = {}
+    data[:geo_city] = reverse_geolocation[:results][0][:address_components][0][:long_name]
+    data
+  end
 
   def geodata
     data = {}
@@ -24,6 +31,10 @@ class Antipode
     data[:geo_long] = geolocation[:results][0][:geometry][:location][:lng]
     data[:geo_city] = geolocation[:results][0][:address_components][0][:long_name]
     data
+  end
+
+  def reverse_geolocation
+    geocode_service.reverse_geocode(antipode_coordinates)
   end
 
   def geolocation

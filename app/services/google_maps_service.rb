@@ -3,6 +3,10 @@ class GoogleMapsService
     get_json("geocode/json?address=#{location}")
   end
 
+  def reverse_geocode(coordinates)
+    binding.pry
+  end
+
   def get_json(url)
     response = conn.get(url)
     JSON.parse(response.body, symbolize_names: true)
