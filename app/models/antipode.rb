@@ -6,7 +6,27 @@ class Antipode
   end
 
   def search_location
-    @location.capitalize
+    geodata[:geo_city]
   end
+
+  private
+
+  def geodata
+    data = {}
+    data[:geo_lat] = geolocation[:results][0][:geometry][:location][:lat]
+    data[:geo_long] = geolocation[:results][0][:geometry][:location][:lng]
+    data[:geo_city] = geolocation[:results][0][:address_components][0][:long_name]
+    data
+  end
+
+  def geolocation
+    geocode_service.geocode(@location)
+  end
+
+  def geocode_service
+    GoogleMapsService.new
+  end
+
+
 
 end
