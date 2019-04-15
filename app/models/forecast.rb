@@ -63,7 +63,7 @@ class Forecast
   private
 
   def search_city
-    City.find_or_create_by(query: @search_location) do |city|
+    @_search_city ||= City.find_or_create_by(query: @search_location) do |city|
       city.lat = geodata[:geo_lat]
       city.long = geodata[:geo_long]
       city.city = geodata[:geo_city]
@@ -89,7 +89,7 @@ class Forecast
   end
 
   def forecast_data
-    weather_service.get_forecast(search_city)
+    @_forecast_data ||= weather_service.get_forecast(search_city)
   end
 
   def weather_service
