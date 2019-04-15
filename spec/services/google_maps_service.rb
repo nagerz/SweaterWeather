@@ -29,7 +29,8 @@ describe GoogleMapsService do
 
         response = service.reverse_geocode(coordinates)
 
-        expect(response[:results][1][:formatted_address]).to eq("Jujuy, Argentina")
+        expect(response[:results][0][:address_components][1][:long_name]).to eq("Jujuy")
+        expect(response[:results][0][:address_components][2][:long_name]).to eq("Argentina")
       end
     end
   end

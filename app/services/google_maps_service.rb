@@ -4,7 +4,7 @@ class GoogleMapsService
   end
 
   def reverse_geocode(coordinates)
-    binding.pry
+    get_json("geocode/json?latlng=#{coordinates[:lat]},#{coordinates[:long]}")
   end
 
   def get_json(url)
