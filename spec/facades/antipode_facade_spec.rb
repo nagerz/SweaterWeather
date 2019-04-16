@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Antipode do
+RSpec.describe AntipodeFacade do
   before :each do
     url1 = "https://maps.googleapis.com/maps/api/geocode/json?address=hongkong&key=#{ENV['GOOGLE_PLACES_API_KEY']}"
     filename1 = 'hongkong_geocode_data.json'
@@ -15,36 +15,16 @@ RSpec.describe Antipode do
     stub_get_json(url3, filename3)
   end
 
-  it 'has location' do
-    antipode = Antipode.new('hongkong')
-
-    expect(antipode.location).to eq("hongkong")
-  end
-
   it 'has search location' do
-
-
-    antipode = Antipode.new('hongkong')
+    antipode = AntipodeFacade.new('hongkong')
 
     expect(antipode.search_location).to eq("Hong Kong")
   end
 
-  it 'can find antipode city coordinates' do
-    expected = {
-            "lat": -22.3193039,
-            "long": -65.8306389
-        }
-
-    antipode = Antipode.new('hongkong')
-
-    expect(antipode.antipode_coordinates).to eq(expected)
-  end
-
   it 'can find antipode city location' do
-    #expected = 'La Quiaca'
     expected = 'Jujuy'
 
-    antipode = Antipode.new('hongkong')
+    antipode = AntipodeFacade.new('hongkong')
 
     expect(antipode.location_name).to eq(expected)
   end
@@ -54,9 +34,11 @@ RSpec.describe Antipode do
     filename = 'lapaz_darksky_data.json'
     stub_get_json(url, filename)
 
-    antipode = Antipode.new('hongkong')
+    antipode = AntipodeFacade.new('hongkong')
 
     expect(antipode.forecast).to have_key(:summary)
+    expect(antipode.forecast[:summary]).to eq("Clear")
     expect(antipode.forecast).to have_key(:current_temperature)
+    expect(antipode.forecast[:current_temperature]).to eq(64.8)
   end
 end

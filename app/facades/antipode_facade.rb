@@ -1,29 +1,37 @@
-class Antipode
-  attr_reader :location, :search_location, :location_name, :forecast, :id
+class AntipodeFacade
+  attr_reader :search_location, :location_name, :forecast, :id
 
-  def initialize(location)
-    @location = location
+  def initialize(query)
+    @query = query
     @id = "1"
-  end
-
-  def search_location
-    geodata[:geo_city]
-  end
-
-  def location_name
-    #"#{reverse_geodata[:geo_city]}, #{reverse_geodata[:geo_country]}"
-    reverse_geodata[:geo_city]
+    @search_location = query_city.city
+    @location_name = antipode_city.city
   end
 
   def forecast
-    AntipodeWeather.new(city).forecast
-  end
-
-  def antipode_coordinates
-    @antipode_coordinate ||= antipode_service.antipode(geodata)[:data][:attributes]
+    AntipodeWeather.new(antipode_city).forecast
   end
 
   private
+
+  def query_city
+    @_query_city ||= City.find_or_create_by(query: @query) do |city|
+      city.lat = geodata[:geo_lat]
+      city.long = geodata[:geo_long]
+      city.city = geodata[:geo_city]
+    end
+  end
+
+  def antipode_city
+    @_antipode_city ||= City.find_or_create_by(antipode_coordinates) do |city|
+      city.query = reverse_geodata[:geo_city]
+      city.city = reverse_geodata[:geo_city]
+    end
+  end
+
+  def antipode_coordinates
+    @_antipode_coordinates ||= antipode_service.antipode(query_city)[:data][:attributes]
+  end
 
   def geodata
     data = {}
@@ -41,7 +49,7 @@ class Antipode
   end
 
   def geolocation
-    @geolocation ||= geocode_service.geocode(@location)
+    @geolocation ||= geocode_service.geocode(@query)
   end
 
   def reverse_geolocation
@@ -54,14 +62,6 @@ class Antipode
 
   def antipode_service
     AntipodeService.new
-  end
-
-  def city
-    @city ||= City.find_or_create_by(query: location_name) do |city|
-      city.lat = antipode_coordinates[:lat]
-      city.long = antipode_coordinates[:long]
-      city.city = location_name
-    end
   end
 
 end

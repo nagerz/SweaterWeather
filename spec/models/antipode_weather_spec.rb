@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Antipode do
+RSpec.describe AntipodeWeather do
   before :each do
   end
 

@@ -1,6 +1,6 @@
 class AntipodeService
-  def antipode(geodata)
-    get_json("antipodes?lat=#{geodata[:geo_lat]}&long=#{geodata[:geo_long]}")
+  def antipode(city)
+    get_json("antipodes?lat=#{city.lat}&long=#{city.long}")
   end
 
   def get_json(url)
