@@ -3,18 +3,43 @@ class Api::V1::FavoritesController < Api::V1::BaseController
 
   def create
     user = User.find_by(api_key: params[:api_key])
-    request_city = City.find_or_create_by(query: params[:location]) do |city|
+    if request_city
+      if favorite_unique?(user, request_city)
+        user.favorites.create(city: request_city)
+        render json: ("#{request_city.city} favorited").to_json, status: 200
+      else
+        render json: ("Already favorited").to_json, status: :bad_request
+      end
+    else
+      render json: ("Bad/Missing location or city").to_json, status: :bad_request
+    end
+  end
+
+  private
+
+  def request_city
+    if params[:location]
+      find_city_by_query(params[:location])
+    elsif params[:city]
+      find_city_by_id(params[:city])
+    end
+  end
+
+  def find_city_by_query(query)
+    City.find_or_create_by(query: query) do |city|
       city.lat = geodata[:geo_lat]
       city.long = geodata[:geo_long]
       city.city = geodata[:geo_city]
     end
-
-    user.favorite.create(city: request_city)
-
-    render json: {"success": "#{request_city.city} favorited"}, status: 200
   end
 
-  private
+  def find_city_by_id(id)
+    City.find_by(id: id)
+  end
+
+  def favorite_unique?(user, city)
+    user.favorites.where(city: city).empty?
+  end
 
   def geodata
     data = {}

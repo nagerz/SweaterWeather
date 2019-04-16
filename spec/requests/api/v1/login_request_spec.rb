@@ -15,7 +15,7 @@ describe 'Login API' do
     it 'can log in an existing user with credentials' do
       login_info = {
                       email: "example@email.com",
-                      password: "password",
+                      password: "password"
                     }
 
       post '/api/v1/sessions', params: login_info
@@ -32,7 +32,7 @@ describe 'Login API' do
       it 'bad password' do
         login_info = {
                               email: "example@email.com",
-                              password: "bad_password",
+                              password: "bad_password"
                             }
 
         post '/api/v1/sessions', params: login_info
