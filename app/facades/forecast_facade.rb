@@ -32,10 +32,6 @@ class ForecastFacade
     Forecast.new(@location)
   end
 
-  def weather_service
-    DarkskyService.new
-  end
-
   def geocode_service
     GoogleMapsService.new
   end
