@@ -10,9 +10,7 @@ class UnsplashService
 
   def conn(location)
     Faraday.new(url: 'https://api.unsplash.com/') do |faraday|
-      faraday.params['query'] = location
-      faraday.params['query'] = "skyline"
-      faraday.params['query'] = "city"
+      faraday.params['query'] = "#{location} skyline city"
       faraday.params['client_id'] = ENV['UNSPLASH_ACCESS_KEY']
       faraday.adapter Faraday.default_adapter
     end

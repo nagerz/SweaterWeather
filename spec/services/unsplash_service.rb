@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe UnsplashService do
+describe UnsplashService, :vcr do
   it 'exists' do
     service = UnsplashService.new
 
