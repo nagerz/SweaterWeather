@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Forecast do
   it 'has attributes' do
-    url1 = 'https://maps.googleapis.com/maps/api/geocode/json?address=denver,co&key=AIzaSyASZYL_UTIJOEIrJzKbdn9DmAcFjo2Svo0'
+    url1 = "https://maps.googleapis.com/maps/api/geocode/json?address=denver,co&key=#{ENV['GOOGLE_PLACES_API_KEY']}"
     filename1 = 'denver_geocode_data.json'
     stub_get_json(url1, filename1)
 
-    url2 = 'https://api.darksky.net/forecast/1d96407050cb8bcf57fe632453b34828/39.7392358,-104.990251'
+    url2 = "https://api.darksky.net/forecast/#{ENV['DARKSKY_SECRET_KEY']}/39.7392358,-104.990251"
     filename2 = 'denver_darksky_data.json'
     stub_get_json(url2, filename2)
 

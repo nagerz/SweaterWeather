@@ -5,7 +5,7 @@ RSpec.describe Antipode do
   end
 
   it 'has a forecast' do
-    url = 'https://api.darksky.net/forecast/1d96407050cb8bcf57fe632453b34828/-22.3193039,-65.8306389'
+    url = "https://api.darksky.net/forecast/#{ENV['DARKSKY_SECRET_KEY']}/-22.3193039,-65.8306389"
     filename = 'lapaz_darksky_data.json'
     stub_get_json(url, filename)
 

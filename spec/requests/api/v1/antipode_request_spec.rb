@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Antipode API' do
   context 'Endpoints' do
     it 'can find an antipode with a given location' do
-      url1 = 'https://maps.googleapis.com/maps/api/geocode/json?address=hongkong&key=AIzaSyASZYL_UTIJOEIrJzKbdn9DmAcFjo2Svo0'
+      url1 = "https://maps.googleapis.com/maps/api/geocode/json?address=hongkong&key=#{ENV['GOOGLE_PLACES_API_KEY']}"
       filename1 = 'hongkong_geocode_data.json'
       stub_get_json(url1, filename1)
 
@@ -11,11 +11,11 @@ describe 'Antipode API' do
       filename2 = 'hongkong_antipode_data.json'
       stub_get_json(url2, filename2)
 
-      url3 = 'https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyASZYL_UTIJOEIrJzKbdn9DmAcFjo2Svo0&latlng=-22.3193039,-65.8306389'
+      url3 = "https://maps.googleapis.com/maps/api/geocode/json?key=#{ENV['GOOGLE_PLACES_API_KEY']}&latlng=-22.3193039,-65.8306389"
       filename3 = 'jujuy_reverse_geocode_data.json'
       stub_get_json(url3, filename3)
 
-      url4 = 'https://api.darksky.net/forecast/1d96407050cb8bcf57fe632453b34828/-22.3193039,-65.8306389'
+      url4 = "https://api.darksky.net/forecast/#{ENV['DARKSKY_SECRET_KEY']}/-22.3193039,-65.8306389"
       filename4 = 'lapaz_darksky_data.json'
       stub_get_json(url4, filename4)
 
