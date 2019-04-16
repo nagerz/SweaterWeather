@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get '/forecast', to: 'forecast#show'
       get '/backgrounds', to: 'backgrounds#index'
       get '/antipode', to: 'antipode#show'
+      post '/users', to: 'users#create'
     end
   end
 end
