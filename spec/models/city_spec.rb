@@ -9,6 +9,8 @@ RSpec.describe City, type: :model do
   end
 
   describe 'relationships' do
+    it { should have_many(:favorites) }
+    it { should have_many(:users).through(:favorites) }
   end
 
   describe 'Class Methods' do
