@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Favorites API' do
+describe 'Favorites Create API' do
   context 'Endpoints' do
     before :each do
       registration_info = {
@@ -187,13 +187,9 @@ describe 'Favorites API' do
         expect(@user.favorites.empty?).to be(true)
       end
 
-      xit 'city already favorited' do
+      it 'city already favorited' do
         city = City.create(city: "Denver", lat: 5, long: 5, query: "denver,co")
         Favorite.create(user: @user, city: city)
-
-        url1 = "https://maps.googleapis.com/maps/api/geocode/json?address=denver,co&key=#{ENV['GOOGLE_PLACES_API_KEY']}"
-        filename1 = 'denver_geocode_data.json'
-        stub_get_json(url1, filename1)
 
         favorite_info = {
                           "location": "denver,co",
@@ -209,8 +205,34 @@ describe 'Favorites API' do
 
         expect(body).to eq('Already favorited')
 
-        expect(Favorite.count).to eq(0)
-        expect(@user.favorites.empty?).to be(true)
+        expect(Favorite.count).to eq(1)
+        expect(@user.favorites.count).to eq(1)
+      end
+
+      it 'city already favorited with different query' do
+        city = City.create(city: "Denver", lat: 5, long: 5, query: "denver,co")
+        Favorite.create(user: @user, city: city)
+
+        url1 = "https://maps.googleapis.com/maps/api/geocode/json?address=Denver&key=#{ENV['GOOGLE_PLACES_API_KEY']}"
+        filename1 = 'denver_geocode_data.json'
+        stub_get_json(url1, filename1)
+
+        favorite_info = {
+                          "location": "Denver",
+                          "api_key": "jgn983hy48thw9begh98h4539h4"
+                        }
+
+        post '/api/v1/favorites', params: favorite_info
+
+        expect(response).to_not be_successful
+        expect(response.status).to eq(400)
+
+        body = JSON.parse(response.body)
+
+        expect(body).to eq('Already favorited')
+
+        expect(Favorite.count).to eq(1)
+        expect(@user.favorites.count).to eq(1)
       end
     end
   end
