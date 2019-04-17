@@ -3,4 +3,7 @@ class City < ApplicationRecord
   validates :lat, presence: true
   validates :long, presence: true
   validates :query, presence: true
+
+  has_many :favorites
+  has_many :users, through: :favorites
 end
