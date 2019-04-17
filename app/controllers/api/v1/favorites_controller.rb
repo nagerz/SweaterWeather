@@ -34,12 +34,12 @@ class Api::V1::FavoritesController < Api::V1::BaseController
 
   private
 
-  def user
-    User.find_by(api_key: favorite_params[:api_key])
-  end
-
   def favorite_params
     params.permit(:api_key, :location, :city)
+  end
+
+  def user
+    User.find_by(api_key: favorite_params[:api_key])
   end
 
   def request_city
@@ -63,10 +63,6 @@ class Api::V1::FavoritesController < Api::V1::BaseController
     City.find_by(id: id)
   end
 
-  def favorite_unique?(user, city)
-    user.cities.where(city: city.city).empty?
-  end
-
   def geodata
     data = {}
     data[:geo_lat] = geolocation[:results][0][:geometry][:location][:lat]
@@ -82,6 +78,10 @@ class Api::V1::FavoritesController < Api::V1::BaseController
 
   def geocode_service
     GoogleMapsService.new
+  end
+
+  def favorite_unique?(user, city)
+    user.cities.where(city: city.city).empty?
   end
 
   def authenticate!

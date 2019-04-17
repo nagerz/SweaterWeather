@@ -10,7 +10,7 @@ describe AntipodeService, :vcr do
   describe 'instance methods' do
     describe '#antipode' do
       it 'returns json with antipode coordinates for a given location' do
-        geodata = {:geo_lat=>22.3193039, :geo_long=>114.1693611, :geo_city=>"Hong Kong"}
+        city = City.create(city: 'Hong Kong', lat: 22.3193039, long: 114.1693611)
 
         expected = {
                     "lat": -22.3193039,
@@ -19,7 +19,7 @@ describe AntipodeService, :vcr do
 
         service = AntipodeService.new
 
-        response = service.antipode(geodata)
+        response = service.antipode(city)
 
         expect(response[:data][:attributes]).to eq(expected)
       end
