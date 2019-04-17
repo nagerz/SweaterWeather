@@ -73,6 +73,14 @@ end
 
 SimpleCov.start 'rails'
 
+SimpleCov.start do
+  add_filter 'app/helpers/application_helper.rb'
+  add_filter 'app/channels/'
+  add_filter 'app/jobs/'
+  add_filter 'app/mailers/'
+end
+
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
