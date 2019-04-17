@@ -23,7 +23,7 @@ http_interactions:
       Server:
       - Cowboy
       Date:
-      - Wed, 17 Apr 2019 17:08:43 GMT
+      - Wed, 17 Apr 2019 19:11:27 GMT
       Connection:
       - keep-alive
       X-Frame-Options:
@@ -45,9 +45,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f9b32b39-cffd-403d-ae9a-72fb1b6c9ac1
+      - 653ac85d-1921-461e-854a-e46e6279a231
       X-Runtime:
-      - '0.002356'
+      - '0.002281'
       Transfer-Encoding:
       - chunked
       Via:
@@ -56,5 +56,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"data":{"id":"1","type":"antipode","attributes":{"lat":-22.3193039,"long":-65.8306389}}}'
     http_version: 
-  recorded_at: Wed, 17 Apr 2019 17:08:43 GMT
+  recorded_at: Wed, 17 Apr 2019 19:11:27 GMT
 recorded_with: VCR 4.0.0

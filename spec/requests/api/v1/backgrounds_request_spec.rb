@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Background API' do
   context 'Endpoints' do
     it 'can find a list of background images by a location' do
-      url1 = "https://api.unsplash.com/search/photos?client_id=#{ENV['UNSPLASH_ACCESS_KEY']}&query=denver,co%20skyline%20city"
+      url1 = "https://api.unsplash.com/search/photos?client_id=#{ENV['UNSPLASH_ACCESS_KEY']}&orientation=landscape&query=denver,co%20skyline%20city"
       filename1 = 'background_data.json'
       stub_get_json(url1, filename1)
 
